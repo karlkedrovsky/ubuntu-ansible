@@ -4,9 +4,13 @@
   tasks:
   - name: update cache and upgrade existing packages
     apt: upgrade=dist update_cache=yes cache_valid_time=3600 force=yes autoremove=yes
-  - name: Install packages
+  - name: install packages
     apt:
       name:
         - zsh
         - vim
         - emacs
+        - keychain
+        - curl
+        - htop
+        - docker.io
