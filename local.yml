@@ -2,6 +2,9 @@
 - hosts: localhost
   become: true
   tasks:
-  - name: Install zsh
-    apt: name=zsh
-
+  - name: Install packages
+    apt: name={{item}}
+    with_items:
+      - zsh
+      - vim
+      - emacs
