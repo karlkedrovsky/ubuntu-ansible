@@ -8,9 +8,18 @@
       state: present
   - name: add google chrome repo
     apt_repository:
-      repo: deb http://dl.google.com/linux/chrome/deb/ stable main
+      repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
       state: present
       filename: google-chrome
+  - name: add vscode apt key
+    apt_key:
+      url: https://packages.microsoft.com/keys/microsoft.asc
+      state: present
+  - name: add vscode repo
+    apt_repository:
+      repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+      state: present
+      filename: vscode
   - name: update cache and upgrade existing packages
     apt: upgrade=dist update_cache=yes cache_valid_time=3600 force=yes autoremove=yes
   - name: install packages
@@ -23,4 +32,6 @@
         - curl
         - htop
         - docker.io
+        - openssh-server
         - google-chrome-stable
+        - code
