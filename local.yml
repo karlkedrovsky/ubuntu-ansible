@@ -2,6 +2,15 @@
 - hosts: localhost
   become: true
   tasks:
+  - name: add google chrome apt key
+    apt_key:
+      url: https://dl-ssl.google.com/linux/linux_signing_key.pub
+      state: present
+  - name: add google chrome repo
+    apt_repository:
+      repo: deb http://dl.google.com/linux/chrome/deb/ stable main
+      state: present
+      filename: google-chrome
   - name: update cache and upgrade existing packages
     apt: upgrade=dist update_cache=yes cache_valid_time=3600 force=yes autoremove=yes
   - name: install packages
