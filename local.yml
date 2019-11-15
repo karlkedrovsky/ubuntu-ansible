@@ -53,10 +53,8 @@
     git: repo=https://github.com/robbyrussell/oh-my-zsh dest=/home/karl/oh-my-zsh
     become: yes
     become_user: karl
-  - name: create custome zsh theme directory
+  - name: create custom zsh theme directory
     file: path=/home/karl/oh-my-zsh/custom/themes state=directory owner=karl mode=0755
-  - name: copy custom zsh theme
-    copy: src=files/karl.zsh-theme dest=/home/karl/oh-my-zsh/custom/themes/karl.zsh-theme owner=karl mode=0644
   - name: check for user config files
     stat: path=config
     register: user_config_files
@@ -66,6 +64,8 @@
     become: yes
     become_user: karl
     when: user_config_files.stat.exists == False
+  - name: copy custom zsh theme
+    copy: src=/home/karl/config/karl.zsh-theme dest=/home/karl/oh-my-zsh/custom/themes/karl.zsh-theme owner=karl mode=0644
   - name: link .zshrc
     file: src=/home/karl/config/zshrc dest=/home/karl/.zshrc state=link
     become: yes
