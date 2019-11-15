@@ -32,6 +32,12 @@
         - curl
         - htop
         - docker.io
+        - docker-compose
         - openssh-server
+        - thunderbird
+        - youtube-dl
+        - python3-pip
+        - python3-venv
+        - php-cli
         - google-chrome-stable
         - code
