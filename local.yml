@@ -41,3 +41,7 @@
         - php-cli
         - google-chrome-stable
         - code
+  - name: set normal user shell to zsh
+    user:
+      name: karl
+      shell: /usr/bin/zsh
