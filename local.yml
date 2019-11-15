@@ -35,12 +35,15 @@
         - docker-compose
         - openssh-server
         - thunderbird
+        - tilix
         - youtube-dl
         - python3-pip
         - python3-venv
         - php-cli
         - google-chrome-stable
         - code
+  - name: create vte symlink for terminals like tilix
+    file: src=/etc/profile.d/vte-2.91.sh dest=/etc/profile.d/vte.sh state=link
   - name: set git username
     git_config: name=user.name scope=global value="Karl Kedrovsky"
     become: yes
