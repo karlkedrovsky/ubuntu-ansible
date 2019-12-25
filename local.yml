@@ -42,6 +42,7 @@
         - php-cli
         - google-chrome-stable
         - code
+        - syncthing
   - name: create vte symlink for terminals like tilix
     file: src=/etc/profile.d/vte-2.91.sh dest=/etc/profile.d/vte.sh state=link
   - name: set git username
@@ -85,3 +86,19 @@
     user:
       name: karl
       shell: /usr/bin/zsh
+  - name: create user systemd directory
+    file: path=/home/karl/.config/systemd/user/default.target.wants state=directory
+    become: yes
+    become_user: karl
+  - name: link syncthing.service
+    file: src=/home/karl/config/syncthing.service dest=/home/karl/.config/systemd/user/default.target.wants/syncthing.service state=link
+    become: yes
+    become_user: karl
+  - name: enable syncthing user service
+    systemd:
+      name: syncthing
+      scope: user
+      state: started
+      enabled: yes
+    become: yes
+    become_user: karl
