@@ -6,11 +6,6 @@
     apt_key:
       url: https://dl-ssl.google.com/linux/linux_signing_key.pub
       state: present
-  - name: add google chrome repo
-    apt_repository:
-      repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
-      state: present
-      filename: google-chrome
   - name: add vscode apt key
     apt_key:
       url: https://packages.microsoft.com/keys/microsoft.asc
@@ -40,9 +35,11 @@
         - python3-pip
         - python3-venv
         - php-cli
-        - google-chrome-stable
         - code
         - syncthing
+  - name: install google chrome
+    apt:
+      deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   - name: create vte symlink for terminals like tilix
     file: src=/etc/profile.d/vte-2.91.sh dest=/etc/profile.d/vte.sh state=link
   - name: set git username
